@@ -2,14 +2,28 @@
     display: inline;
     margin-right: 10px;
     margin-top: 10px;
-    max-width: 200px;
+    max-width: 150px;
 }
 
-.filterTitle {
-    display: inline-block;
+#filter-and-sorting-panel {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.filter-button {
+    max-width: 200px;
 }
 
 .expand-button {
     display: inline-block;
     max-width: 50px;
+}
+
+#sort-panel {
+    display: flex;
+}
+
+#sort-select {
+    max-width: 200px;
 }
