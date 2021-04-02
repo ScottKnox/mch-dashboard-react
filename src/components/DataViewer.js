@@ -1,16 +1,15 @@
-import React, {useState} from 'react';
+import React from 'react';
 import '../css/DataViewer.css';
 
-function DataViewer() {
-  const [data, setData] = useState([]);
+function DataViewer(props) {
 
     return (
     <div>
-    <h1>Assignments</h1>
+    <h1>{props.dataType}</h1>
         <div className="card card-body">
         <div id="filter-and-sorting-panel">
         <div id="filter-panel">
-          <a className="btn btn-primary filter-button" data-toggle="collapse" data-target="#filter-options" aria-expanded="false" aria-controls="filter-options">
+          <a className="btn btn-primary filter-button" data-toggle="collapse" href="#filter-options" data-target="#filter-options" aria-expanded="false" aria-controls="filter-options">
           <h4>Filters ∨</h4>
           </a>
           </div>
