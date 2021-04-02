@@ -1,7 +1,14 @@
 import React from 'react';
+import axios from 'axios';
 import '../css/DataViewer.css';
 
 function DataViewer(props) {
+
+    function getResults() {
+        axios.get('http://192.168.1.130/mhc-data-resources/assessments', {
+
+        });
+    }
 
     return (
     <div>
