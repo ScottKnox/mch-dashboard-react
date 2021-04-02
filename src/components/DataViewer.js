@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../css/DataViewer.css';
 
 function DataViewer(props) {
 
-    function getResults() {
-        axios.get('http://192.168.1.130/mhc-data-resources/assessments', {
+    const [data, setData] = useState([]);
 
+    function getData() {
+        axios.get('http://192.168.1.110/mhc-data-resources/assessments', {
+            // Add params and headers here
+        }).then((response) => {
+            setData(response.data.assessments);
         });
     }
+
+    // Get initial assessment data
+    useEffect(() => {
+        getData();
+    }, []);
 
     return (
     <div>
@@ -49,43 +58,29 @@ function DataViewer(props) {
           <table className="table table-dark table-striped">
           <thead>
               <tr>
-                <th scope="col">Date Created</th>
+                <th scope="col">Start Date</th>
                 <th scope="col">Provider ID</th>
                 <th scope="col">Patient ID</th>
-                <th scope="col">Patient Name</th>
+                <th scope="col">Patient Auth</th>
                 <th scope="col">Assessment Name</th>
                 <th scope="col">Recurrence Frequency</th>
-                <th scope="col">Completed?</th>
+                <th scope="col">Patient DFN</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>04/01/2021</td>
-                <td>64</td>
-                <td>1666780001V942030</td>
-                <td>Kermit</td>
-                <td>GAD-7</td>
-                <td>Once</td>
-                <td>False</td>
-              </tr>
-              <tr>
-                <td>04/01/2021</td>
-                <td>64</td>
-                <td>1666780001V942030</td>
-                <td>Jacob</td>
-                <td>PHQ-9</td>
-                <td>Once</td>
-                <td>False</td>
-              </tr>
-              <tr>
-                <td>04/01/2021</td>
-                <td>64</td>
-                <td>1666780001V942030</td>
-                <td>Todd</td>
-                <td>PHQ-9</td>
-                <td>Once</td>
-                <td>False</td>
-              </tr>
+            {data.map((value, index) => {
+                return (
+                    <tr>
+                        <td>{value.startDate}</td>
+                        <td>{value.providerId}</td>
+                        <td>{value.patientId}</td>
+                        <td>{value.patientAssignAuth}</td>
+                        <td>{value.assessmentName}</td>
+                        <td>{value.recurrenceFrequency}</td>
+                        <td>{value.patientDfn}</td>
+                    </tr>
+                )
+            })}
             </tbody>
           </table>
         </div>
